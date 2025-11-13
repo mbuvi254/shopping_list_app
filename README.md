@@ -1,37 +1,72 @@
 **Shopping List App**
 
-- **Description:**: A small TypeScript + React (Vite) shopping list app that stores items in `localStorage`. Users add items with a name, price, quantity and priority; the app shows subtotals and a grand total.
 
 **Setup**
 
-- **Install:**: Run `npm install` to install dependencies.
-- **Run (dev):**: Run `npm run dev` to start the Vite dev server.
-- **Build:**: Run `npm run build` to create a production build.
-- **Preview:**: Run `npm run preview` to serve the production build locally.
 
 **Main Files**
 
-- **Component:**: `src/App.tsx` — main app component and UI.
-  - **State:**: Uses `shoppingList` (array of `Item`) in component state and persists it to `localStorage`.
-  - **Types:**: `interface Item { name: string; price: number; qty: number; priority: Priority }` (Priority is `"High" | "Medium" | "Low"`).
-  - **Form:**: Controlled inputs for `name`, `price`, `qty`, and `priority` with validation (price & qty must be > 0, name required).
-  - **Add Item:**: `AddNewItem` handles `onSubmit`, appends a new item to `shoppingList`, resets inputs, and updates `localStorage` via a `useEffect`.
-  - **Delete Item:**: `deleteItem(index)` removes an item by index.
-  - **Totals:**: Sub-total shown per item (`price * qty`) and `grandTotal` computed via `reduce`.
 
 **Usage Notes**
 
-- **Persistence:**: The app automatically saves and loads the shopping list from `localStorage` under the key `shoppingList`.
-- **Extending:**: To add features (edit items, sort by priority, categories), modify `src/App.tsx` and update the `Item` type as needed.
 
 **Dev Tips**
 
-- **Formatting:**: Project uses TypeScript; format with your preferred tool (Prettier/ESLint) if configured.
-- **Testing changes:**: After edits run `npm run dev` and verify UI and `localStorage` behavior in the browser.
 
 **Files to Inspect**
 
-- `src/App.tsx` — main logic and UI
-- `src/App.css` — basic styles applied to the app
+
+**Shopping List App**
+
+- **Description:** A small TypeScript + React (Vite) shopping list app. Users add items (name, price, quantity, priority). The app persists the list to `localStorage`, shows per-item subtotals and a grand total.
+
+**Quick Setup**
+- Install dependencies: `npm install`
+- Start dev server: `npm run dev`
+- Build production: `npm run build`
+- Preview production build: `npm run preview`
+
+**Project Structure & Main Files**
+- `src/App.tsx` — App entry component
+  - Renders the UI, composes `ItemForm` and `ItemList`, and keeps the `shoppingList` state.
+  - Persists `shoppingList` to `localStorage` (key: `shoppingList`) using `useEffect`.
+  - Exposes `addItem(item: Item)` and `deleteItem(index: number)` handlers.
+  - Computes `grandTotal` via `shoppingList.reduce((acc, item) => acc + item.price * item.qty, 0)`.
+
+- `src/components/ItemForm.tsx` — controlled form component
+  - Props: `onAdd(item: Item)` — called when a valid item is submitted.
+  - Local state: `name`, `price`, `qty`, `priority` (Priority = `"High" | "Medium" | "Low"`).
+  - Validates inputs (name must be non-empty, price & qty > 0), constructs an `Item`, calls `onAdd`, and resets inputs.
+
+- `src/components/ItemList.tsx` — (list rendering component)
+  - Renders items, shows per-item `Sub-Total: price * qty`, and exposes a delete button.
+
+- `src/types.ts` — shared types
+  - `export type Priority = "High" | "Medium" | "Low";`
+  - `export interface Item { name: string; price: number; qty: number; priority: Priority }`
+
+**Behavior & Usage**
+- Adding items: fill the form and submit. The app validates and appends the item.
+- Deleting items: click the item's Delete button (deletes by index).
+- Persistence: the list is saved to `localStorage` automatically and restored on load.
+
+**Notes & Extensibility**
+- The form is a controlled React component (`ItemForm`) and is reusable — you can lift state or move it to a context/Store if needed.
+- To add features such as editing an item, sorting, filtering by priority, or categories, update `src/types.ts` and extend `ItemList`/`App` handlers.
+
+**Dev Tips**
+- Use browser devtools to inspect `localStorage` (key `shoppingList`) during development.
+- Formatting / linting: run configured linters or add Prettier/ESLint if needed.
+
+**Run checklist**
+```bash
+npm install
+npm run dev
+```
 
 ---
+Want me to:
+- add a short CONTRIBUTING or DEV guide, or
+- add unit tests for `ItemForm` and `ItemList`, or
+- wire a simple GitHub Actions CI for linting/build?
+Tell me which and I’ll implement it.
