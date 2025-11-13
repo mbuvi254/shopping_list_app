@@ -1,0 +1,46 @@
+.item_card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.item_card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.item_card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.item_card strong {
+  color: #333;
+  margin-right: 5px;
+}
+
+.item_card button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.item_card button:hover {
+  background-color: #c82333;
+}
+
+.item_card button:active {
+  transform: translateY(1px);
+}
