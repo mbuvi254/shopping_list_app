@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { Item, Priority } from "../types/index";
-import style from "../css-components/Form.module.css";
+// import style from "../css-components/Form.module.css";
 
 interface ItemFormProps {
   onAdd: (item: Item) => void;
