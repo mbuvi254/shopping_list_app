@@ -64,9 +64,3 @@ npm install
 npm run dev
 ```
 
----
-Want me to:
-- add a short CONTRIBUTING or DEV guide, or
-- add unit tests for `ItemForm` and `ItemList`, or
-- wire a simple GitHub Actions CI for linting/build?
-Tell me which and I’ll implement it.
